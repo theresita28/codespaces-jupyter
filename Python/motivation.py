@@ -3,11 +3,11 @@
 
 import random
 
-adjektivlist = [beste, liebenswürdigste, schönste, größte]
-nomenlist = [Mensch, Programmierer, Freund] 
+adjektivlist = ["beste", "liebenswürdigste", "schönste", "größte"]
+nomenlist = ["Mensch", "Programmierer", "Freund"] 
 
 
-adjektiv = print(random.choice(adjektiv))
-nomen = print(random.choice(nomenlist))
+adjektiv = random.choice(adjektivlist)
+nomen = random.choice(nomenlist)
 
 print("Du bist der " + adjektiv + " " + nomen)
