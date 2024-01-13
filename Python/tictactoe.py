@@ -15,3 +15,19 @@ def spielfeld_ausgeben():
     print (spielfeld[7] + "|" + spielfeld[8] + "|" + spielfeld[9] )
 
 spielfeld_ausgeben()
+
+def spieler_eingabe():
+    while True:
+        spielzug = input("Bitte Feld eingeben: ")
+        try:
+            spielzug = int(spielzug)
+        except ValueError:
+            print("Bitte Zahl von 1 bis 9 eingeben")
+        else:
+            if spielzug >= 1 and spielzug <= 9:
+                return spielzug
+            else:
+                print("Zahl muss zwischen 1 und 9 liegen")
+spielzug = spieler_eingabe()
+
+print("Ausgewähltes Feld: " + str(spielzug))
