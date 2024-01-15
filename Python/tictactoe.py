@@ -7,6 +7,7 @@ spielfeld = ["", "1", "2", "3", "4", "5","6", "7","8", "9"]
 
 
 print("Tic-Tac-Toe")
+spiel_aktiv = True
 
 #Funktion Spielfeld ausgeben
 def spielfeld_ausgeben():
@@ -14,11 +15,15 @@ def spielfeld_ausgeben():
     print (spielfeld[4] + "|" + spielfeld[5] + "|" + spielfeld[6] )
     print (spielfeld[7] + "|" + spielfeld[8] + "|" + spielfeld[9] )
 
-spielfeld_ausgeben()
+
 
 def spieler_eingabe():
     while True:
         spielzug = input("Bitte Feld eingeben: ")
+        # vorzeitiges Spielende durch Spieler
+        if spielzug == 'q':
+            spiel_aktiv = False
+            return
         try:
             spielzug = int(spielzug)
         except ValueError:
@@ -28,6 +33,12 @@ def spieler_eingabe():
                 return spielzug
             else:
                 print("Zahl muss zwischen 1 und 9 liegen")
-spielzug = spieler_eingabe()
 
-print("Ausgewähltes Feld: " + str(spielzug))
+
+while spiel_aktiv:
+    # aktuelles Spielfeld ausgeben
+    spielfeld_ausgeben()
+    # Eingabe des aktiven Spielers
+    spielzug = spieler_eingabe()
+    print("Ausgewähltes Feld: " + str(spielzug))
+
