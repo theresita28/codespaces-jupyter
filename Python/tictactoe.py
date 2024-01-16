@@ -8,6 +8,7 @@ spielfeld = ["", "1", "2", "3", "4", "5","6", "7","8", "9"]
 
 print("Tic-Tac-Toe")
 spiel_aktiv = True
+spieler_aktuell = 'X'
 
 #Funktion Spielfeld ausgeben
 def spielfeld_ausgeben():
@@ -18,6 +19,7 @@ def spielfeld_ausgeben():
 
 
 def spieler_eingabe():
+    global spiel_aktiv
     while True:
         spielzug = input("Bitte Feld eingeben: ")
         # vorzeitiges Spielende durch Spieler
@@ -34,11 +36,24 @@ def spieler_eingabe():
             else:
                 print("Zahl muss zwischen 1 und 9 liegen")
 
+def spieler_wechseln():
+    global spieler_aktuell2
+    if spieler_aktuell == 'X':
+        spieler_aktuell = 'O'
+    else:
+        spieler_aktuell = 'X'
 
+spielfeld_ausgeben()
 while spiel_aktiv:
-    # aktuelles Spielfeld ausgeben
-    spielfeld_ausgeben()
+    
+    
     # Eingabe des aktiven Spielers
+    print ("Spieler " + spieler_aktuell + " am Zug")
     spielzug = spieler_eingabe()
-    print("Ausgewähltes Feld: " + str(spielzug))
+    if spielzug:
+        spielfeld[spielzug] = 'X'
+        # aktuelles Spielfeld ausgeben
+        spielfeld_ausgeben()
+        spieler_wechseln()
+    
 
