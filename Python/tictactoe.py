@@ -37,23 +37,48 @@ def spieler_eingabe():
                 print("Zahl muss zwischen 1 und 9 liegen")
 
 def spieler_wechseln():
-    global spieler_aktuell2
+    global spieler_aktuell
     if spieler_aktuell == 'X':
         spieler_aktuell = 'O'
     else:
         spieler_aktuell = 'X'
 
+# Kontrolle, ob ein Spieler gewonnen hat
+def kontrolle_gewonnen():
+    # wenn alle 3 Felder gleich sind, hat der entsprechende Spieler gewonnen
+    # Kontrolle auf Reihen
+    if spielfeld[1] == spielfeld[2] == spielfeld[3]:
+        return spielfeld[1]
+    if spielfeld[4] == spielfeld[5] == spielfeld[6]:
+        return spielfeld[4]
+    if spielfeld[7] == spielfeld[8] == spielfeld[9]:
+        return spielfeld[7]
+    # Kontrolle auf Spalten
+    if spielfeld[1] == spielfeld[4] == spielfeld[7]:
+        return spielfeld[1]
+    if spielfeld[2] == spielfeld[5] == spielfeld[8]:
+        return spielfeld[2]
+    if spielfeld[3] == spielfeld[6] == spielfeld[9]:
+        return spielfeld[3]
+    # Kontrolle auf Diagonalen
+    if spielfeld[1] == spielfeld[5] == spielfeld[9]:
+        return spielfeld[1]
+    if spielfeld[7] == spielfeld[5] == spielfeld[3]:
+        return spielfeld[5]
+
 spielfeld_ausgeben()
 while spiel_aktiv:
-    
-    
     # Eingabe des aktiven Spielers
     print ("Spieler " + spieler_aktuell + " am Zug")
     spielzug = spieler_eingabe()
     if spielzug:
-        spielfeld[spielzug] = 'X'
+        spielfeld[spielzug] = spieler_aktuell
         # aktuelles Spielfeld ausgeben
         spielfeld_ausgeben()
+        gewonnen = kontrolle_gewonnen()
+        if gewonnen:
+          print ("Spieler " + gewonnen + " hat gewonnen!")
+          spiel_aktiv = False  
         spieler_wechseln()
     
 
