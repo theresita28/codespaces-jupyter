@@ -66,9 +66,24 @@ def kontrolle_gewonnen():
     if spielfeld[7] == spielfeld[5] == spielfeld[3]:
         return spielfeld[5]
 
+
+def kontrolle_auf_unentschieden():
+    if (spielfeld[1] == 'X' or spielfeld[1] == 'O') \
+      and (spielfeld[2] == 'X' or spielfeld[2] == 'O') \
+      and (spielfeld[3] == 'X' or spielfeld[3] == 'O') \
+      and (spielfeld[4] == 'X' or spielfeld[4] == 'O') \
+      and (spielfeld[5] == 'X' or spielfeld[5] == 'O') \
+      and (spielfeld[6] == 'X' or spielfeld[6] == 'O') \
+      and (spielfeld[7] == 'X' or spielfeld[7] == 'O') \
+      and (spielfeld[8] == 'X' or spielfeld[8] == 'O') \
+      and (spielfeld[9] == 'X' or spielfeld[9] == 'O'):
+        return ('unentschieden')
+
+
 spielfeld_ausgeben()
 while spiel_aktiv:
     # Eingabe des aktiven Spielers
+    print()
     print ("Spieler " + spieler_aktuell + " am Zug")
     spielzug = spieler_eingabe()
     if spielzug:
@@ -79,6 +94,11 @@ while spiel_aktiv:
         if gewonnen:
           print ("Spieler " + gewonnen + " hat gewonnen!")
           spiel_aktiv = False  
+        #Abfrage untetschieden
+        unentschieden = kontrolle_auf_unentschieden()
+        if unentschieden:
+            print ("Spiel ist unentschieden ausgegangen")
+            spiel_aktiv = False
         spieler_wechseln()
-    
+print()   
 
