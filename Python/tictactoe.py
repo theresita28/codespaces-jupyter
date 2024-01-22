@@ -2,6 +2,7 @@
 # Tic-Tac-toe game
 
 # Anleitung des Spiels:
+# Bis jetzt können zwei Spieler gegeneinander spielen. Die Spieler müssen nacheinander eine Zahl, die dem Feld entspricht, eingeben
 
 spielfeld = ["", "1", "2", "3", "4", "5","6", "7","8", "9"]
 
@@ -32,7 +33,10 @@ def spieler_eingabe():
             print("Bitte Zahl von 1 bis 9 eingeben")
         else:
             if spielzug >= 1 and spielzug <= 9:
-                return spielzug
+                if spielfeld[spielzug] == 'X' or spielfeld[spielzug] == 'O':
+                    print("Das Feld ist bereits belegt - ein anderes wählen! ")
+                else:
+                 return spielzug
             else:
                 print("Zahl muss zwischen 1 und 9 liegen")
 
