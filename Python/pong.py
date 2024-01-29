@@ -1,5 +1,6 @@
+# Inspiration https://www.python-lernen.de/pygame-animation.htm
 # Importieren der Pygame-Bibliothek
-import pygame
+import pygame, math
 
 # initialisieren von pygame
 pygame.init()
@@ -11,8 +12,11 @@ GRUEN   = ( 0, 255, 0)
 SCHWARZ = ( 0, 0, 0)
 WEISS   = ( 255, 255, 255)
 
+FENSTERBREITE = 640
+FENSTERHÖHE = 480
+
 # Fenster öffnen
-screen = pygame.display.set_mode((640, 480))
+screen = pygame.display.set_mode((FENSTERBREITE, FENSTERHÖHE))
 
 # Titel für Fensterkopf
 pygame.display.set_caption("Unser erstes Pygame-Spiel")
@@ -22,6 +26,10 @@ spielaktiv = True
 
 # Bildschirm Aktualisierungen einstellen
 clock = pygame.time.Clock()
+
+# Definieren der Variablen
+ballpos_x = 10
+ballpos_y = 30
 
 # Schleife Hauptprogramm
 while spielaktiv:
@@ -37,6 +45,7 @@ while spielaktiv:
     screen.fill(SCHWARZ)
 
     # Spielfeld/figuren zeichnen
+    pygame.draw.ellipse(screen, WEISS,[ballpos_x,ballpos_y,20,20])
 
     # Fenster aktualisieren
     pygame.display.flip()
