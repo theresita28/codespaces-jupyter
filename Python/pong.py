@@ -31,6 +31,9 @@ clock = pygame.time.Clock()
 ballpos_x = 10
 ballpos_y = 30
 
+bewegung_x = 4
+bewegung_y = 4
+
 # Schleife Hauptprogramm
 while spielaktiv:
     # Überprüfen, ob Nutzer eine Aktion durchgeführt hat
@@ -46,6 +49,12 @@ while spielaktiv:
 
     # Spielfeld/figuren zeichnen
     pygame.draw.ellipse(screen, WEISS,[ballpos_x,ballpos_y,20,20])
+    
+    # bewegen unseres Kreises
+    if ballpos_y < FENSTERHÖHE:
+        ballpos_y += bewegung_y
+    else:
+        ballpos_y -= bewegung_y
 
     # Fenster aktualisieren
     pygame.display.flip()
