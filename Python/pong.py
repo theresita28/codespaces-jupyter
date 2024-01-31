@@ -31,6 +31,8 @@ clock = pygame.time.Clock()
 ballpos_x = 10
 ballpos_y = 30
 
+BALL_DURCHMESSER = 20
+
 bewegung_x = 4
 bewegung_y = 4
 
@@ -48,13 +50,17 @@ while spielaktiv:
     screen.fill(SCHWARZ)
 
     # Spielfeld/figuren zeichnen
-    pygame.draw.ellipse(screen, WEISS,[ballpos_x,ballpos_y,20,20])
+    pygame.draw.ellipse(screen, WEISS,[ballpos_x,ballpos_y,BALL_DURCHMESSER,BALL_DURCHMESSER])
     
     # bewegen unseres Kreises
-    if ballpos_y < FENSTERHÖHE:
-        ballpos_y += bewegung_y
-    else:
-        ballpos_y -= bewegung_y
+    ballpos_x += bewegung_x
+    ballpos_y += bewegung_y
+
+    if ballpos_y > FENSTERHÖHE - BALL_DURCHMESSER or ballpos_y < 0:
+        bewegung_y = bewegung_y * -1
+
+    if ballpos_x > FENSTERBREITE - BALL_DURCHMESSER or ballpos_x < 0:
+        bewegung_x = bewegung_x * -1
 
     # Fenster aktualisieren
     pygame.display.flip()
