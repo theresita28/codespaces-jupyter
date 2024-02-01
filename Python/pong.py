@@ -36,6 +36,9 @@ BALL_DURCHMESSER = 20
 bewegung_x = 4
 bewegung_y = 4
 
+spielfigur_1_x = 20
+spielfigur_1_y = 20
+
 # Schleife Hauptprogramm
 while spielaktiv:
     # Überprüfen, ob Nutzer eine Aktion durchgeführt hat
@@ -51,7 +54,8 @@ while spielaktiv:
 
     # Spielfeld/figuren zeichnen
     pygame.draw.ellipse(screen, WEISS,[ballpos_x,ballpos_y,BALL_DURCHMESSER,BALL_DURCHMESSER])
-    
+    # -- Spielerfigur 1
+    pygame.draw.rect(screen, WEISS, [spielfigur_1_x, spielfigur_1_y, 20, 100])
     # bewegen unseres Kreises
     ballpos_x += bewegung_x
     ballpos_y += bewegung_y
