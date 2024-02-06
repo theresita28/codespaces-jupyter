@@ -38,6 +38,7 @@ bewegung_y = 4
 
 spielfigur_1_x = 20
 spielfigur_1_y = 20
+spielfigur_1_bewegung = 0
 
 # Schleife Hauptprogramm
 while spielaktiv:
@@ -46,9 +47,19 @@ while spielaktiv:
         if event.type == pygame.QUIT:
             spielaktiv = False
             print("Spieler hat Quit-Button angeklickt")
+        elif event.type == pygame.KEYDOWN:
+            print("Spieler hat Taste gedrückt")
 
+            # Taste für Spieler 1
+            if event.key == pygame.K_UP:
+                print("Spieler hat Pfeiltaste hoch gedrückt")
+                spielfigur_1_bewegung = -6
+            if event.key == pygame.K_DOWN:
+                print("Spieler hat Pfeiltaste runter gedrückt")
+                spielfigur_1_bewegung = 6
     # Spiellogik hier integrieren
-
+    if spielfigur_1_bewegung != 0:
+        spielfigur_1_y += spielfigur_1_bewegung
     # Spielfeld löschen
     screen.fill(SCHWARZ)
 
