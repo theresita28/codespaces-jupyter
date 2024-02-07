@@ -40,6 +40,12 @@ spielfigur_1_x = 20
 spielfigur_1_y = 20
 spielfigur_1_bewegung = 0
 
+spielfigur_2_x = FENSTERBREITE - (2 * 20)
+spielfigur_2_y = 20
+spielfigur_2_bewegung = 0
+
+schlaegerhoehe = 100
+
 # Schleife Hauptprogramm
 while spielaktiv:
     # Überprüfen, ob Nutzer eine Aktion durchgeführt hat
@@ -47,26 +53,70 @@ while spielaktiv:
         if event.type == pygame.QUIT:
             spielaktiv = False
             print("Spieler hat Quit-Button angeklickt")
-        elif event.type == pygame.KEYDOWN:
+
+        if event.type == pygame.KEYDOWN:
             print("Spieler hat Taste gedrückt")
 
             # Taste für Spieler 1
             if event.key == pygame.K_UP:
                 print("Spieler hat Pfeiltaste hoch gedrückt")
                 spielfigur_1_bewegung = -6
-            if event.key == pygame.K_DOWN:
+
+            elif event.key == pygame.K_DOWN:
                 print("Spieler hat Pfeiltaste runter gedrückt")
                 spielfigur_1_bewegung = 6
-    # Spiellogik hier integrieren
+              # Taste für Spieler 2
+            elif event.key == pygame.K_w:
+                print("Spieler 2 hat w für hoch gedrückt")
+                spielfigur_2_bewegung = -6
+            elif event.key == pygame.K_s:
+                print("Spieler 2 hat s für runter gedrückt")
+                spielfigur_2_bewegung = 6
+
+
+        if event.type == pygame.KEYUP:
+            print("Spieler hat Taste losgelassen")
+
+            # Tasten für Spieler 1
+            if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
+                print("Spieler 1 stoppt bewegung")
+                spielfigur_1_bewegung = 0
+
+             # Tasten für Spieler 2
+            elif event.key == pygame.K_w or event.key == pygame.K_s:
+                print("Spieler 1 stoppt bewegung")
+                spielfigur_2_bewegung = 0
+
+    # Spiellogik 
     if spielfigur_1_bewegung != 0:
         spielfigur_1_y += spielfigur_1_bewegung
+    
+    if spielfigur_1_y < 0:
+        spielfigur_1_y = 0
+
+    if spielfigur_1_y > FENSTERHÖHE - schlaegerhoehe:
+        spielfigur_1_y = FENSTERHÖHE - schlaegerhoehe
+    
+    if spielfigur_2_bewegung != 0:
+        spielfigur_2_y += spielfigur_2_bewegung
+
+    if spielfigur_2_y < 0:
+        spielfigur_2_y = 0
+
+    if spielfigur_2_y > FENSTERHÖHE - schlaegerhoehe:
+        spielfigur_2_y = FENSTERHÖHE - schlaegerhoehe
+
     # Spielfeld löschen
     screen.fill(SCHWARZ)
 
     # Spielfeld/figuren zeichnen
     pygame.draw.ellipse(screen, WEISS,[ballpos_x,ballpos_y,BALL_DURCHMESSER,BALL_DURCHMESSER])
     # -- Spielerfigur 1
-    pygame.draw.rect(screen, WEISS, [spielfigur_1_x, spielfigur_1_y, 20, 100])
+    pygame.draw.rect(screen, WEISS, [spielfigur_1_x, spielfigur_1_y, 20,  schlaegerhoehe])
+     # -- Spielerfigur 2
+    pygame.draw.rect(screen, WEISS, [spielfigur_2_x, spielfigur_2_y, 20, schlaegerhoehe])
+    
+    
     # bewegen unseres Kreises
     ballpos_x += bewegung_x
     ballpos_y += bewegung_y
