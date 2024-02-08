@@ -19,7 +19,7 @@ FENSTERHÖHE = 480
 screen = pygame.display.set_mode((FENSTERBREITE, FENSTERHÖHE))
 
 # Titel für Fensterkopf
-pygame.display.set_caption("Unser erstes Pygame-Spiel")
+pygame.display.set_caption("Mein erstes Pygame-Spiel")
 
 # solange die Variable True ist, soll das Spiel laufen
 spielaktiv = True
@@ -45,6 +45,8 @@ spielfigur_2_y = 20
 spielfigur_2_bewegung = 0
 
 schlaegerhoehe = 100
+
+ballwechsel = 0
 
 # Schleife Hauptprogramm
 while spielaktiv:
@@ -110,11 +112,11 @@ while spielaktiv:
     screen.fill(SCHWARZ)
 
     # Spielfeld/figuren zeichnen
-    pygame.draw.ellipse(screen, WEISS,[ballpos_x,ballpos_y,BALL_DURCHMESSER,BALL_DURCHMESSER])
+    ball = pygame.draw.ellipse(screen, WEISS,[ballpos_x,ballpos_y,BALL_DURCHMESSER,BALL_DURCHMESSER])
     # -- Spielerfigur 1
-    pygame.draw.rect(screen, WEISS, [spielfigur_1_x, spielfigur_1_y, 20,  schlaegerhoehe])
+    player1 = pygame.draw.rect(screen, WEISS, [spielfigur_1_x, spielfigur_1_y, 20,  schlaegerhoehe])
      # -- Spielerfigur 2
-    pygame.draw.rect(screen, WEISS, [spielfigur_2_x, spielfigur_2_y, 20, schlaegerhoehe])
+    player2 = pygame.draw.rect(screen, WEISS, [spielfigur_2_x, spielfigur_2_y, 20, schlaegerhoehe])
     
     
     # bewegen unseres Kreises
@@ -126,6 +128,26 @@ while spielaktiv:
 
     if ballpos_x > FENSTERBREITE - BALL_DURCHMESSER or ballpos_x < 0:
         bewegung_x = bewegung_x * -1
+
+    if player1.colliderect(ball):
+        print("Zusammenstoß P1")
+        bewegung_x = bewegung_x * -1
+        ballpos_x = 40
+        ballwechsel += 1
+        schlaegerhoehe -= 5
+
+    if player2.colliderect(ball):
+        print("Zusammenstoß P2")
+        bewegung_x = bewegung_x * -1
+        ballpos_x = 570
+        ballwechsel += 1
+        schlaegerhoehe -= 5
+
+    ausgabetext = "Ballwechsel: " + str(ballwechsel)
+    font = pygame.font.SysFont(None, 70)
+    text = font.render(ausgabetext, True, ROT)
+    screen.blit(text, [100, 10])    
+
 
     # Fenster aktualisieren
     pygame.display.flip()
