@@ -5,6 +5,11 @@ import pygame, math
 # initialisieren von pygame
 pygame.init()
 
+# Musik/Soundeffekte einrichten
+pygame.mixer.music.load('sound/MusicGame.mid')
+pygame.mixer.music.play(-1,0.0)
+pygame.mixer.music.set_volume(.6)
+
 # genutzte Farbe
 ORANGE  = ( 255, 140, 0)
 ROT     = ( 255, 0, 0)
@@ -88,6 +93,21 @@ while spielaktiv:
             elif event.key == pygame.K_w or event.key == pygame.K_s:
                 print("Spieler 1 stoppt bewegung")
                 spielfigur_2_bewegung = 0
+        
+        if event.type == pygame.K_p:
+                print("Spiel pausieren")
+                if spielpause == True:
+                    spielpause = False
+                    pygame.mixer.music.unpause()
+                    bewegung_x = spielpause_x
+                    bewegung_y = spielpause_y
+                else:
+                    spielpause = True
+                    pygame.mixer.music.pause()
+                    spielpause_x = bewegung_x
+                    spielpause_y = bewegung_y
+                    bewegung_x = 0
+                    bewegung_y = 0
 
     # Spiellogik 
     if spielfigur_1_bewegung != 0:
